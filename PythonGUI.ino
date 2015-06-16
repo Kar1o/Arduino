@@ -1,16 +1,15 @@
-int led1 = 2;
-int led2 = 3;
-int led3 = 4;
-int led4 = 5;
+#include <RelayBoard.h> //Inclui a biblioteca RelayBoard.h
+
+#define data    6 //Define a palavra data como 6 para o pino D6 ser utilizado como o pino do DATA
+#define strobe  3 //Define a palavra strobe como 4 para o pino D4 ser utilizado como o pino do STROBE
+#define clock   2 //Define a palavra clock como 2 para o pino D2 ser utilizado como o pino do CLOCK
+#define numberboards 2 //Define a palavra numberboards como 2, onde é definido quantas RelayBoard há no circuito
+
+RelayBoard relay(data, strobe, clock, numberboards);
 
 void setup() {
   
   Serial.begin(9600);
-  
-  pinMode(led1, OUTPUT);
-  pinMode(led2, OUTPUT);
-  pinMode(led3, OUTPUT);
-  pinMode(led4, OUTPUT);
 }
 
 void loop() {
@@ -20,42 +19,60 @@ void loop() {
    Serial.println(inByte);
    switch (inByte) {
      case '0':
-       digitalWrite(led1, LOW);
-       digitalWrite(led2, LOW);
-       digitalWrite(led3, LOW);
-       digitalWrite(led4, LOW);
+       relay.set(0,0,1);
+       relay.set(0,1,1);
+       relay.set(0,2,1);
+       relay.set(0,3,1);
+       relay.set(0,4,1);
+       relay.set(0,5,1);
+       relay.set(0,6,1);
+       relay.set(0,7,1);
        break;
+       
      case '1':
-       digitalWrite(led1, HIGH);
-       digitalWrite(led2, HIGH);
-       digitalWrite(led3, HIGH);
-       digitalWrite(led4, HIGH);
+       relay.set(0,0,0);
+       relay.set(0,1,0);
+       relay.set(0,2,0);
+       relay.set(0,3,0);
+       relay.set(0,4,0);
+       relay.set(0,5,0);
+       relay.set(0,6,0);
+       relay.set(0,7,0);
        break;
+       
      case '2':
-       digitalWrite(led1, HIGH);
+       relay.set(0,0,1);
        break;
+       
      case '3':
-       digitalWrite(led2, HIGH);
+       relay.set(0,1,1);
        break;
+       
      case '4':
-       digitalWrite(led3, HIGH);
+       relay.set(0,2,1);
        break;
+       
      case '5':
-       digitalWrite(led4, HIGH);
+       relay.set(0,3,1);
        break;
-     case '11':
-       digitalWrite(led1, LOW);
+       
+     case '6':
+       relay.set(0,4,1);
        break;
-     case '12':
-       digitalWrite(led2, LOW);
+       
+     case '7':
+       relay.set(0,5,1);
        break;
-     case '13':
-       digitalWrite(led3, LOW);
+       
+     case '8':
+       relay.set(0,6,1);
        break;
-     case '14':
-       digitalWrite(led4, LOW);
+       
+     case '9':
+       relay.set(0,7,1);
        break;
+       
    }
   }
-  delay(350); 
+  delay(420); 
 }
